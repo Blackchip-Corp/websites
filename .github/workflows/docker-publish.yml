@@ -23,7 +23,23 @@ env:
 
 
 jobs:
-  build:
+  build-pages:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Pre-create dirs
+        run: mkdir -p ./public/{sk,et}
+      - name: Build Sketaria
+        uses: actions/jekyll-build-pages@v1.0.12
+        with:
+          source: ./sites/sk
+          destination: ./public/sk
+      - name: Build EuskadiTech
+        uses: actions/jekyll-build-pages@v1.0.12
+        with:
+          source: ./sites/et
+          destination: ./public/et
+          
+  build-docker:
 
     runs-on: ubuntu-latest
     permissions:
