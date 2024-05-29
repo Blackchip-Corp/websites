@@ -1,0 +1,47 @@
+    <header class="bcc-check">
+        <table border>
+            <thead>
+                <tr>
+                    <th colspan="3">¿Es sitio web oficial de BlackChip Corp?</th>
+                </tr>
+                <tr>
+                    <td colspan="3">Si algun indicador está rojo: Estás accediendo a una pagina insegura, ¡no es
+                        oficial!</td>
+                </tr>
+                <tr>
+                    <td colspan="3">Si todo está verde: Es una pagina oficial, pero deberias revisar la URL de forma
+                        manual.</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td id="is_techeus">La URL acaba en en tech.eus</td>
+                    <td id="is_https">Se está utilizando HTTPS</td>
+                </tr>
+                <tr>
+                    <td colspan="3" id="is_safe" class="bcc-check-yes">¡Es seguro!</td>
+                </tr>
+            </tbody>
+        </table>
+        <script>
+            window.onload = function () {
+                let is_techeus = document.getElementById("is_techeus");
+                let is_https = document.getElementById("is_https");
+                let is_safe = document.getElementById("is_safe");
+                if (location.hostname.endsWith(".tech.eus") || location.hostname == "tech.eus") {
+                    is_techeus.classList.add("bcc-check-yes")
+                } else {
+                    is_techeus.classList.add("bcc-check-no")
+                    is_safe.classList.add("bcc-check-no")
+                    is_safe.innerText = "¡¡NO ES SEGURO!!"
+                }
+                if (location.protocol == "https") {
+                    is_https.classList.add("bcc-check-yes")
+                } else {
+                    is_https.classList.add("bcc-check-no")
+                    is_safe.classList.add("bcc-check-no")
+                    is_safe.innerText = "¡¡NO ES SEGURO!!"
+                }
+            };
+        </script>
+    </header>
