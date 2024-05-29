@@ -1,14 +1,12 @@
-    <header class="bcc-check">
-        <style>
-            
-        .bcc-check {
+<header class="bcc-check">
+    <style>
+        .bcc-check table {
+            max-width: 70%;
+            width: auto;
+            margin: 0 auto;
             text-align: center;
             background-color: antiquewhite;
-            padding: 15px;
-        }
-
-        .bcc-check table {
-            width: 100%;
+            border-radius: 12.5px;
         }
 
         .bcc-check-yes {
@@ -22,50 +20,74 @@
             font-weight: 600;
             font-size: large;
         }
-            </style>
-        <table border>
-            <thead>
-                <tr>
-                    <th colspan="3">¿Es sitio web oficial de BlackChip Corp?</th>
-                </tr>
-                <tr>
-                    <td colspan="3">Si algun indicador está rojo: Estás accediendo a una pagina insegura, ¡no es
-                        oficial!</td>
-                </tr>
-                <tr>
-                    <td colspan="3">Si todo está verde: Es una pagina oficial, pero deberias revisar la URL de forma
-                        manual.</td>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td id="is_techeus">La URL acaba en en tech.eus</td>
-                    <td id="is_https">Se está utilizando HTTPS</td>
-                </tr>
-                <tr>
-                    <td colspan="3" id="is_safe" class="bcc-check-yes">¡Es seguro!</td>
-                </tr>
-            </tbody>
-        </table>
-        <script>
-            window.onload = function () {
-                let is_techeus = document.getElementById("is_techeus");
-                let is_https = document.getElementById("is_https");
-                let is_safe = document.getElementById("is_safe");
-                if (location.hostname.endsWith(".tech.eus") || location.hostname == "tech.eus") {
-                    is_techeus.classList.add("bcc-check-yes")
-                } else {
-                    is_techeus.classList.add("bcc-check-no")
-                    is_safe.classList.add("bcc-check-no")
-                    is_safe.innerText = "¡¡NO ES SEGURO!!"
-                }
-                if (location.protocol == "https") {
-                    is_https.classList.add("bcc-check-yes")
-                } else {
-                    is_https.classList.add("bcc-check-no")
-                    is_safe.classList.add("bcc-check-no")
-                    is_safe.innerText = "¡¡NO ES SEGURO!!"
-                }
-            };
-        </script>
-    </header>
+
+        .bcc-check-btn {
+            background-color: aqua;
+            padding: 5px 0;
+            font-size: 20px;
+            min-width: 25%;
+            border-radius: 15px;
+        }
+
+        .bcc-check-row td {
+            width: 10%;
+        }
+
+        .bcc-check-hidden {
+            display: none;
+            width: 0;
+        }
+    </style>
+    <table>
+        <thead>
+            <tr>
+                <th colspan="6">¿Es sitio web oficial de BlackChip Corp?</th>
+            </tr>
+            <tr>
+                <th colspan="6">
+                    <button class="bcc-check-btn" onclick="check();">Comprobar</button>
+                </th>
+            </tr>
+        </thead>
+        <tbody class="bcc-check-hidden" id="bcc-check-hidden">
+            <tr>
+                <td colspan="3">Si algun indicador está rojo: Estás accediendo a una pagina insegura, ¡no es
+                    oficial!</td>
+            </tr>
+            <tr>
+                <td colspan="3">Si todo está verde: Es una pagina oficial, pero deberias revisar la URL de forma
+                    manual.</td>
+            </tr>
+            <tr class="bcc-check-row">
+                <td id="is_techeus">¿La URL acaba en tech.eus?</td>
+                <td id="is_https">¿Conexión segura HTTPS?</td>
+                <td> ¡Comprueba! </td>
+                <td> ¡Verifica! </td>
+                <td> ¡Confia! </td>
+                <td> ¡Revisa! </td>
+            </tr>
+        </tbody>
+    </table>
+    <script>
+        function check() {
+            document.getElementById("bcc-check-hidden").className = "";
+            let is_techeus = document.getElementById("is_techeus");
+            let is_https = document.getElementById("is_https");
+            let is_safe = document.getElementById("is_safe");
+            if (location.hostname.endsWith(".tech.eus") || location.hostname == "tech.eus") {
+                is_techeus.classList.add("bcc-check-yes")
+                is_techeus.innerHTML += " <br>Acaba en tech.eus"
+            } else {
+                is_techeus.classList.add("bcc-check-no")
+                is_techeus.innerHTML += " <br>¡No acaba en tech.eus!"
+            }
+            if (location.protocol === "https:") {
+                is_https.classList.add("bcc-check-yes")
+                is_https.innerHTML += " <br>Conexión segura"
+            } else {
+                is_https.classList.add("bcc-check-no")
+                is_https.innerHTML += " <br>¡No usa HTTPS!"
+            }
+        };
+    </script>
+</header>
